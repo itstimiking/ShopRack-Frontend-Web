@@ -16,7 +16,7 @@ const Navbar = React.lazy(()=> import('./components/Navbar'));
 const Dropdown = React.lazy(()=> import('./components/Dropdown'));
 const Services = React.lazy(()=> import('./components/services/Services'));
 const Showcase = React.lazy(()=> import('./components/Showcase'));
-const Dashboard = React.lazy(()=> import('./routes/Dashboard'));
+const Dashboard = React.lazy(()=> import('./routes/dashboard/Dashboard'));
 const AuthCheck = React.lazy(()=> import('./HOC/AuthCheck'));
 
 const Signin = React.lazy(()=> import('./routes/registration/Signin'));
