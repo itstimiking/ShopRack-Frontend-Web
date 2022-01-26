@@ -26,7 +26,7 @@ const ContactUs = () => {
         <form
           action=''
           // onSubmit={onSubmit}
-          className='flex flex-col w-full'>
+          className='flex flex-col md:w-1/2 w-full'>
           <div>
             <input
               type='text'
