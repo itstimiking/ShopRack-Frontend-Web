@@ -49,6 +49,9 @@ const Signup = React.lazy(() =>
   import('./routes/registration/Signup')
 );
 
+const PreventAuthUser = React.lazy(()=> import('./HOC/PreventAuthUser'));
+
+
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme } = useTheme();
@@ -59,85 +62,78 @@ function App() {
 
   return (
     <AuthUserContextProvider>
-      <div
-        className='overflow-x-hidden'
-        style={{ color: theme.textcolor.dark }}>
-        <Router>
-          <Routes>
-            <Route
-              exact
-              path='/'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <>
-                    <Navbar toggle={toggle} />
-                    <Dropdown
-                      isOpen={isOpen}
-                      toggle={toggle}
-                    />
-                    <Showcase />
-                    <Services />
-                    <AppDownload />
-                    <CustomerReview />
-                    <Blog />
-                    <Footer />
-                  </>
-                </Suspense>
-              }
-            />
-            <Route
-              exact
-              path='/signin'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Signin />
-                </Suspense>
-              }
-            />
-            <Route
-              exact
-              path='/contactus'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <ContactUs />
-                </Suspense>
-              }
-            />
-            <Route
-              exact
-              path='/signup'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Signup />
-                </Suspense>
-              }
-            />
-            <Route
-              exact
-              path='/dashboard'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <AuthCheck component={Dashboard} />
-                </Suspense>
-              }
-            />
-            <Route
-              path='*'
-              element={
-                <main className='flex flex-col h-screen items-center justify-center container text-red-400 font-black'>
-                  <h1 className='text-4xl'>
-                    404! Not found
-                  </h1>
-                  <p className='text-2xl'>
-                    Check the url! Are you sure you are not
-                    lost?
-                  </p>
-                </main>
-              }
-            />
-          </Routes>
-        </Router>
-      </div>
+        <div className='overflow-x-hidden' style={{color:theme.textcolor.dark}}>
+          <Router>
+            <Routes>
+              <Route
+                exact
+                path='/'
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <>
+                      <Navbar toggle={toggle} />
+                      <Dropdown
+                        isOpen={isOpen}
+                        toggle={toggle}
+                      />
+                      <Showcase />
+                      <Services />
+                      <AppDownload />
+                      <CustomerReview />
+                      <Blog />
+                      <Footer />
+                    </> 
+                  </Suspense>
+                }
+              />
+              <Route
+                exact
+                path='/contactus'
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ContactUs />
+                  </Suspense>
+                }
+              />
+              <Route
+                exact
+                path='/signin'
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <PreventAuthUser component={Signin} />
+                  </Suspense>
+                }
+              />
+              <Route
+                exact
+                path='/signup'
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <PreventAuthUser component={Signup} />
+                  </Suspense>
+                }
+              />
+              <Route 
+                exact
+                path="/dashboard" 
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <AuthCheck component={Dashboard} />
+                  </Suspense>
+                } 
+              />
+              <Route
+                path="*"
+                element={
+                  <main className="flex flex-col h-screen items-center justify-center container text-red-400 font-black">
+                    <h1 className="text-4xl">404! Not found</h1>
+                    <p className="text-2xl">Check the url! Are you sure you are not lost?</p>
+                  </main>
+                }
+              />
+            </Routes>
+          </Router>
+        </div>
     </AuthUserContextProvider>
   );
 }

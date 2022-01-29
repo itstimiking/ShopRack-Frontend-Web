@@ -1,7 +1,7 @@
 import React,{useEffect, useRef,useCallback} from 'react';
 import Button from '../../components/button-component/Button';
 import { useTheme } from '../../context/ThemeContext';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate, useLocation} from 'react-router-dom';
 import { useAuth } from '../../context/AuthUserContext';
 
 const Signin = () => {
@@ -10,6 +10,9 @@ const Signin = () => {
   const password = useRef(null);
   
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const destination = location.state?.path || "/dashboard";
 
   const { theme } = useTheme();
 
@@ -24,10 +27,10 @@ const Signin = () => {
     }
  
     login(user, () =>{
-      navigate("/dashboard", { replace: true });
+      navigate(destination, { replace: true });
     })
 
-  },[navigate,login,email,password])
+  },[navigate,login,email,password,destination])
 
   useEffect(()=>{
     const button = signinButton.current
