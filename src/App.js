@@ -1,33 +1,60 @@
-import React, { useState, Suspense} from 'react';
+import React, { useState, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
 } from 'react-router-dom';
-import { useTheme } from './context/ThemeContext';
+
 import { AuthUserContextProvider } from './context/AuthUserContext';
 import Loading from './components/Loading';
+import { useTheme } from './context/ThemeContext';
 
-const AppDownload = React.lazy(()=> import('./components/AppDownload'));
-const Blog = React.lazy(()=> import('./components/blog-section/Blog'));
-const CustomerReview = React.lazy(()=> import('./components/customer-review/CustomerReview'));
-const Footer = React.lazy(()=> import('./components/footerSection/Footer'));
-const Navbar = React.lazy(()=> import('./components/Navbar'));
-const Dropdown = React.lazy(()=> import('./components/Dropdown'));
-const Services = React.lazy(()=> import('./components/services/Services'));
-const Showcase = React.lazy(()=> import('./components/Showcase'));
-const Dashboard = React.lazy(()=> import('./routes/dashboard/Dashboard'));
+const AppDownload = React.lazy(() =>
+  import('./components/AppDownload')
+);
+const Blog = React.lazy(() =>
+  import('./components/blog-section/Blog')
+);
+const CustomerReview = React.lazy(() =>
+  import('./components/customer-review/CustomerReview')
+);
+const Footer = React.lazy(() =>
+  import('./components/footerSection/Footer')
+);
+const Navbar = React.lazy(() =>
+  import('./components/Navbar')
+);
+const Dropdown = React.lazy(() =>
+  import('./components/Dropdown')
+);
+const Services = React.lazy(() =>
+  import('./components/services/Services')
+);
+const Showcase = React.lazy(() =>
+  import('./components/Showcase')
+);
+const Dashboard = React.lazy(() =>
+  import('./routes/Dashboard')
+);
+const AuthCheck = React.lazy(() =>
+  import('./HOC/AuthCheck')
+);
+const ContactUs = React.lazy(() =>
+  import('./components/contactus/ContactUs')
+);
+const Signin = React.lazy(() =>
+  import('./routes/registration/Signin')
+);
+const Signup = React.lazy(() =>
+  import('./routes/registration/Signup')
+);
 
-const AuthCheck = React.lazy(()=> import('./HOC/AuthCheck'));
 const PreventAuthUser = React.lazy(()=> import('./HOC/PreventAuthUser'));
 
-const Signin = React.lazy(()=> import('./routes/registration/Signin'));
-const Signup = React.lazy(()=> import('./routes/registration/Signup'));
 
 function App() {
-
   const [isOpen, setIsOpen] = useState(false);
-  const {theme} = useTheme()
+  const { theme } = useTheme();
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -56,6 +83,15 @@ function App() {
                       <Blog />
                       <Footer />
                     </> 
+                  </Suspense>
+                }
+              />
+              <Route
+                exact
+                path='/contactus'
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ContactUs />
                   </Suspense>
                 }
               />
