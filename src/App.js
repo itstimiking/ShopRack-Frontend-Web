@@ -17,7 +17,9 @@ const Dropdown = React.lazy(()=> import('./components/Dropdown'));
 const Services = React.lazy(()=> import('./components/services/Services'));
 const Showcase = React.lazy(()=> import('./components/Showcase'));
 const Dashboard = React.lazy(()=> import('./routes/dashboard/Dashboard'));
+
 const AuthCheck = React.lazy(()=> import('./HOC/AuthCheck'));
+const PreventAuthUser = React.lazy(()=> import('./HOC/PreventAuthUser'));
 
 const Signin = React.lazy(()=> import('./routes/registration/Signin'));
 const Signup = React.lazy(()=> import('./routes/registration/Signup'));
@@ -62,7 +64,7 @@ function App() {
                 path='/signin'
                 element={
                   <Suspense fallback={<Loading />}>
-                    <Signin />
+                    <PreventAuthUser component={Signin} />
                   </Suspense>
                 }
               />
@@ -71,7 +73,7 @@ function App() {
                 path='/signup'
                 element={
                   <Suspense fallback={<Loading />}>
-                    <Signup />
+                    <PreventAuthUser component={Signup} />
                   </Suspense>
                 }
               />

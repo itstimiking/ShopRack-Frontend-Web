@@ -8,7 +8,7 @@ function AuthCheck({component: Component}) {
     const location = useLocation();
 
     if(!authUser.email){
-        return <Navigate to="/signin" state={{ from: location }} replace /> 
+        return <Navigate to="/signin" state={{ path: location.pathname }} replace /> 
     }
     
     return <Component />;
