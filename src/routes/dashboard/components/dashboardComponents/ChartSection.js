@@ -1,9 +1,8 @@
-import React,{ useRef } from 'react';
+import React from 'react';
 import LineChart from './charts/LineChart';
 
 
 function ChartSection() {
-    const date = useRef(null);
     return (
         <section className="w-full flex flex-wrap lg:flex-nowrap min-h-0 space-x-5">
 
